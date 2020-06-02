@@ -1,0 +1,41 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-color: rgba(1, 55, 68, 0.801);
+}
+
+.contenair{
+  padding: 20px;
+}
+
+.card-totais{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.itens{
+   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex-wrap {
+	 flex-wrap: wrap; 
+}
+
+.card-header{
+  background-image: linear-gradient(rgb(4, 21, 53), rgb(8, 36, 97));
+  color: rgb(255, 255, 255);
+}
+
+
+.totalCarrinho{
+  font-weight: bold;
+}
+
+.resumoPedido{
+  padding: 20px;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.5);
+}
