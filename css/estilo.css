@@ -14,7 +14,6 @@ body{
   align-items: center;
 }
 
-
 .itens{
    display: flex;
   flex-direction: row;
@@ -29,7 +28,6 @@ body{
   background-image: linear-gradient(rgb(4, 21, 53), rgb(8, 36, 97));
   color: rgb(255, 255, 255);
 }
-
 
 .totalCarrinho{
   font-weight: bold;
