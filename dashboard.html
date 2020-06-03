@@ -17,21 +17,27 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+
         <li class="nav-item active">
           <a class="nav-link" href="dashboard.html">Tela Inicial </a>
         </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Lançamentos</a>
+        </li>
         
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Usuários
+            Usuário
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Perfil</a>
-            <a class="dropdown-item" href="gerenciarUsuario.html">Gerenciar</a>
-            <a class="dropdown-item" href="index.html">Sair</a>
-
-            
+            <a class="dropdown-item" href="gerenciarUsuario.html">Perfil</a>
+            <a class="dropdown-item" href="gerenciarSenha.html">Senha</a>
           </div>
+        </li>
+
+        <li class="nav-item active">
+        <a class="nav-link" href="index.html">Sair</a>
         </li>
         
       </ul>
@@ -46,7 +52,7 @@
                   <h1>Receitas</h1>
                 </div>
                 <div class="card-body card-totais">
-                  <h1 id="totalprodutos">0</h1>
+                  <h1 id="totalreceitas">0</h1>
                 </div>
              </div>
            </div>
@@ -56,17 +62,17 @@
                  <h1>Despesas</h1>
                </div>
                <div class="card-body card-totais">
-                 <h1 id="totalprodutos">0</h1>
+                 <h1 id="totaldespesas">0</h1>
                </div>
             </div>
           </div>
            <div class="col-md-4">
             <div class="card">
               <div class="card-header" align="center">
-                <h1>Usuários</h1>
+                <h1>Saldo</h1>
               </div>
               <div class="card-body card-totais">
-                <h1 id="totalusuarios">0</h1>
+                <h1 id="totalsaldo">0</h1>
               </div>
            </div>
            </div>

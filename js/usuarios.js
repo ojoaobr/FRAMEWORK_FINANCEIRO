@@ -11,7 +11,7 @@ function salvarUsuario(){
   const cidade = document.getElementById("cidade").value;
   const senha = document.getElementById("senha").value;
   // let id = usuarios.length;
-  const usuario = {id: Date.now(),
+  const usuario = {id: Date.now(), status: "ativo", 
      nome, endereco, telefone, email, cidade,senha};
      usuarios.push(usuario); 
   // gravar no localstorage
@@ -39,7 +39,7 @@ function cadUsuario(){
   const cidade = document.getElementById("cidade").value;
   const senha = document.getElementById("senha").value;
   let id = usuarios.length;
-  const usuario = {id: id++,
+  const usuario = {id: Date.now(), status: "ativo", 
      nome, endereco, telefone, email, cidade,senha};
      //usuarios.push(usuario); 
   // gravar no localstorage
@@ -111,12 +111,13 @@ function cadUsuario(){
  function editarUsuario(id){
    for(let i =0; i< usuarios.length; i++){
      if(usuarios[i].id == id){
-     document.getElementById("id").value =  usuarios[i].id;
-     document.getElementById("nome").value =  usuarios[i].nome;
+      document.getElementById("id").value =  usuarios[i].id;
+      document.getElementById("status").value =  usuarios[i].status;
+      document.getElementById("nome").value =  usuarios[i].nome;
       document.getElementById("endereco").value = usuarios[i].endereco;
-       document.getElementById("telefone").value =  usuarios[i].telefone;
+      document.getElementById("telefone").value =  usuarios[i].telefone;
       document.getElementById("email").value =  usuarios[i].email;
-     document.getElementById("cidade").value =  usuarios[i].cidade;
+      document.getElementById("cidade").value =  usuarios[i].cidade;
      
      }
    }
@@ -124,13 +125,14 @@ function cadUsuario(){
  }
  function alterarUsuario(){
   const id = document.getElementById("id").value;
+  const status = document.getElementById("status").value;
   const nome = document.getElementById("nome").value;
   const endereco = document.getElementById("endereco").value;
   const telefone = document.getElementById("telefone").value;
   const email = document.getElementById("email").value;
   const cidade = document.getElementById("cidade").value;
   let usuarioIndex = usuarios.findIndex(usuario => usuario.id = id);  
-  usuarios[usuarioIndex] = {id,nome, endereco, telefone, email, cidade};
+  usuarios[usuarioIndex] = {id, status, nome, endereco, telefone, email, cidade};
 
   Swal.fire({
     
@@ -152,6 +154,7 @@ function cadUsuario(){
     if(row){
      linha += "<tr>"+
               "<td id='tdid'>"+usuario.id +"</td>"+
+              "<td id='tdstatus'>"+usuario.status +"</td>"+
               "<td id='tdnome'>"+usuario.nome +"</td>"+
               "<td id='tdendereco'>"+usuario.endereco+"</td>"+
               "<td id='tdtelefone'>"+usuario.telefone+"</td>"+

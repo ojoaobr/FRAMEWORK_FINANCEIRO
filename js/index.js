@@ -8,7 +8,7 @@ function salvarUsuario(){
   
   let id = usuarios.length;
 
-  const usuario = {id: Date.now(),nome, endereco, telefone, email};
+  const usuario = {id: Date.now(),status: "ativo", nome, endereco, telefone, email};
   usuarios.push(usuario);
   Swal.fire({
     
@@ -31,7 +31,7 @@ function cadUsuario(){
   const cidade = document.getElementById("cidade").value;
  
 
-  const usuario = {id: Date.now(),nome, endereco, telefone, email,senha, cidade};
+  const usuario = {id: Date.now(), status: "ativo", nome, endereco, telefone, email,senha, cidade};
   //usuarios.push(usuario);//
   // criar o objeto na localstorage
   // esta vazio na memoria
@@ -187,13 +187,12 @@ for(let i = 0; i < inputs.length; i++){
   
 }
 
-
-
 function editarUsuario(id){
   for(let i = 0; i < usuarios.length; i++){
       if(usuarios[i].id == id){
 
         document.getElementById("id").value = usuarios[i].id;
+        document.getElementById("status").value = usuarios[i].status;
         document.getElementById("nome").value = usuarios[i].nome;
         document.getElementById("endereco").value = usuarios[i].endereco;
         document.getElementById("telefone").value = usuarios[i].telefone;
@@ -205,6 +204,7 @@ function editarUsuario(id){
 
 function alterarUsuario(){
   const id = document.getElementById("id").value;
+  const status = document.getElementById("status").value;
   const nome = document.getElementById("nome").value;
   const endereco = document.getElementById("endereco").value;
   const telefone = document.getElementById("telefone").value;
@@ -212,7 +212,7 @@ function alterarUsuario(){
   const cidade = document.getElementById("cidade").value;
 
   // como fazer para atualiza a posicao do array
-  usuarios[id] = {id,nome,endereco,telefone,email,cidade};
+  usuarios[id] = {id,status,nome,endereco,telefone,email,cidade};
   Swal.fire({
     
     icon: 'success',
@@ -232,6 +232,7 @@ function listarUsuarios(){
     row = document.getElementById("tbody");
      linha += "<tr>"+
               "<td id='tdid'>"+usuario.id +"</td>"+
+              "<td id='tdid'>"+usuario.status +"</td>"+
               "<td id='tdnome'>"+usuario.nome +"</td>"+
               "<td id='tdendereco'>"+usuario.endereco+"</td>"+
               "<td id='tdtelefone'>"+usuario.telefone+"</td>"+
@@ -241,8 +242,5 @@ function listarUsuarios(){
               "<button class='btn btn-outline-danger'onclick='apagarUsuario("+usuario.id+")'><i class='fa fa-trash'></i></button></td>"
             +"</tr>";
     row.innerHTML = linha;        
-
-  
-  
   });
  }
