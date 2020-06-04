@@ -1,37 +1,14 @@
 const usuarios = [];
 
-function salvarUsuario(){
-  const nome = document.getElementById("nome").value;
-  const endereco = document.getElementById("endereco").value;
-  const telefone = document.getElementById("telefone").value;
-  const email = document.getElementById("email").value;
-  
-  let id = usuarios.length;
-
-  const usuario = {id: Date.now(),status: "ativo", nome, endereco, telefone, email};
-  usuarios.push(usuario);
-  Swal.fire({
-    
-    icon: 'success',
-    title: 'Usuário cadastrado com sucesso!',
-    showConfirmButton: false,
-    timer: 1500
-  });
-  limpar();
-  listarUsuarios();
- 
-
-}
 function cadUsuario(){
+
   const nome = document.getElementById("nome").value;
   const endereco = document.getElementById("endereco").value;
   const telefone = document.getElementById("telefone").value;
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
-  const cidade = document.getElementById("cidade").value;
  
-
-  const usuario = {id: Date.now(), status: "ativo", nome, endereco, telefone, email,senha, cidade};
+  const usuario = {id: Date.now(),status: "ativo", nome, endereco, telefone, email, senha};
   //usuarios.push(usuario);//
   // criar o objeto na localstorage
   // esta vazio na memoria
@@ -73,13 +50,10 @@ function cadUsuario(){
     }  
     
   }
-  /*usuarioGravado.push(usuario);
-  window.localStorage.setItem('usuarios',JSON.stringify(usuarioGravado));// gravo na memoria o array novo
-  */
   
   
   
-  /*Swal.fire({
+  Swal.fire({
     
     icon: 'success',
     title: 'Usuário cadastrado com sucesso!',
@@ -87,7 +61,7 @@ function cadUsuario(){
     timer: 1500
   });
   limpar();
-  window.location.href = "index.html";*/
+  window.location.href = "dashboard.html";
  
  
 
@@ -125,31 +99,38 @@ function apagarUsuario(id){
 }
 
 function logar(){
+
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
   // recuperar o valor do localstorage
   let usuariosGravados = JSON.parse(window.localStorage.getItem("usuarios"));
+
   //console.log(usuariosGravados);
   let usuarioIndex = usuariosGravados.findIndex(usuario => usuario.email === email);
+
   if(usuarioIndex === -1){ // não tem email cadastrado
-    Swal.fire({
     
+    Swal.fire({
       icon: 'warning',
       title: 'Email não cadastrado!',
       showConfirmButton: false,
       timer: 1500
     });
+
   }else{ // o email é valido e agora vou testar a senha
+
         if(usuariosGravados[usuarioIndex].senha !== senha){ // senha incorreta
+
           Swal.fire({
-    
             icon: 'warning',
             title: 'Senha incorreta!',
             showConfirmButton: false,
             timer: 1500
           });
+          
         }else{ // email e senha validados corretos
+          
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -160,26 +141,25 @@ function logar(){
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
-          })
+          });
           
           Toast.fire({
             icon: 'success',
-            title: `Bem vindo, ${usuariosGravados[usuarioIndex].nome} !`
-          })
+            title: `Bem vindo, ${usuariosGravados[usuarioIndex].nome}!`
+          });
+
+          setInterval(function(){
+            window.location.href = "dashboard.html"; 
+          }),3000;
+
         }
+
   }
   
 }
 
 function limpar(){
-  /* limpar de forma basica manual
-document.getElementById("nome").value = "";
-document.getElementById("endereco").value = "";
-document.getElementById("telefone").value = "";
-document.getElementById("email").value = "";
-document.getElementById("cidade").value = ""; */
 
-/* limpar de forma automatica */
 let inputs = document.getElementsByTagName("input");
 for(let i = 0; i < inputs.length; i++){
    inputs[i].value = "";
@@ -197,7 +177,6 @@ function editarUsuario(id){
         document.getElementById("endereco").value = usuarios[i].endereco;
         document.getElementById("telefone").value = usuarios[i].telefone;
         document.getElementById("email").value = usuarios[i].email;
-        document.getElementById("cidade").value = usuarios[i].cidade;
       }
  }
 }
@@ -209,10 +188,8 @@ function alterarUsuario(){
   const endereco = document.getElementById("endereco").value;
   const telefone = document.getElementById("telefone").value;
   const email = document.getElementById("email").value;
-  const cidade = document.getElementById("cidade").value;
-
   // como fazer para atualiza a posicao do array
-  usuarios[id] = {id,status,nome,endereco,telefone,email,cidade};
+  usuarios[id] = {id,status,nome,endereco,telefone,email};
   Swal.fire({
     
     icon: 'success',
@@ -220,27 +197,40 @@ function alterarUsuario(){
     showConfirmButton: false,
     timer: 1500
   });
-  limpar();
   listarUsuarios();
+  limpar();
 
 }
 
-
 function listarUsuarios(){
+
   let linha = "";
-  usuarios.forEach(usuario => {
-    row = document.getElementById("tbody");
-     linha += "<tr>"+
-              "<td id='tdid'>"+usuario.id +"</td>"+
-              "<td id='tdid'>"+usuario.status +"</td>"+
-              "<td id='tdnome'>"+usuario.nome +"</td>"+
-              "<td id='tdendereco'>"+usuario.endereco+"</td>"+
-              "<td id='tdtelefone'>"+usuario.telefone+"</td>"+
-              "<td id='tdemail'>"+usuario.email+"</td>"+
-              "<td id='tdcidade'>"+usuario.cidade+"</td>"+
-              "<td id='tdacoes'><button class='btn btn-outline-success' onclick='editarUsuario("+usuario.id+")'><i class='fa fa-edit'></i></button>"+
-              "<button class='btn btn-outline-danger'onclick='apagarUsuario("+usuario.id+")'><i class='fa fa-trash'></i></button></td>"
-            +"</tr>";
-    row.innerHTML = linha;        
-  });
- }
+  let usuariosGravado = JSON.parse(window.localStorage.getItem("usuarios"));
+
+  if(usuariosGravado){
+
+    usuariosGravado.forEach(usuario => {
+      row = document.getElementById("tbody");
+
+        if(row){
+
+        linha += "<tr>"+
+                  "<td id='tdnome'>"+usuario.nome +"</td>"+
+                  "<td id='tdendereco'>"+usuario.endereco+"</td>"+
+                  "<td id='tdtelefone'>"+usuario.telefone+"</td>"+
+                  "<td id='tdemail'>"+usuario.email+"</td>"+
+                  "<td id='tdacoes'><button class='btn btn-outline-success' onclick='editarUsuario("+usuario.id+")'><i class='fa fa-edit'></i></button>"+
+                  "<button class='btn btn-outline-danger'onclick='apagarUsuario("+usuario.id+")'><i class='fa fa-trash'></i></button></td>"
+                +"</tr>";
+        row.innerHTML = linha;
+
+        }
+    
+    
+    });
+
+  }
+
+}
+
+ listarUsuarios();

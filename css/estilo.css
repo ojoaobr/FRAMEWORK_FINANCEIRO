@@ -4,7 +4,7 @@ body{
   background-color: rgba(1, 55, 68, 0.801);
 }
 
-.contenair{
+.container{
   padding: 20px;
 }
 
@@ -36,4 +36,14 @@ body{
 .resumoPedido{
   padding: 20px;
   box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.5);
+}
+
+a:link, a:visited {
+  color: black;
+  text-decoration: transparent;
+  cursor: auto;
+}
+
+a:link:active, a:visited:active {
+  color: (internal value);
 }
