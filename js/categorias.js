@@ -1,4 +1,4 @@
-function cadCategoria(){
+function cadastrar(){
     const nome = document.getElementById('nome').value;
     
     if (nome == ""){
@@ -30,7 +30,7 @@ function cadCategoria(){
             showCancelButton: false,
             ConfirmButtonText: 'OK'
         });
-        limpar();
+        Limpar();
         listarCategorias();
     }
 }
@@ -83,18 +83,24 @@ function editarCategoria(id){
     let categoriasGravadas = JSON.parse(window.localStorage.getItem("categorias"));
   for(let i = 0; i < categoriasGravadas.length; i++){
       if(categoriasGravadas[i].id == id){
-        document.getElementById("nome").value = categoriasGravadas[i].nome;
-   
+        document.getElementById("id").value = categoriasGravadas[i].id;
+        document.getElementById("nome").value = categoriasGravadas[i].nome
       }
    }
 }
-function atualizar(id){
-    const nome = document.getElementById('nome').value;
+function alterar(){
 
-    let categoriasGravadas = JSON.parse(windows.localStorage.getItem("categorias"));
-    let categoriaIndex = categoriasGravadas.findIndex(categoria => categoria.id === id);
+    const id = document.getElementById("id").value;
+    const nome = document.getElementById("nome").value;
+    
+    categoriaGravada = JSON.parse(window.localStorage.getItem("categorias"));
+    let categoriaIndex = categoriaGravada.findIndex((categoria => categoria.id == id));
 
-    categoriasGravadas[i] = {id,nome};
+    debugger
+    if(categoriaIndex >= 0){
+        categoriaGravada[categoriaIndex] = {id,nome};
+        window.localStorage.setItem("categorias", JSON.stringify(categoriaGravada));
+    }
   
     Swal.fire({
       

@@ -41,10 +41,6 @@
             </div>
           </li>
 
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Lançamentos</a>
-          </li>
-
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Usuário
@@ -70,35 +66,31 @@
       <div class="row">
 
         <div class="col-md-4">
-          <a href="cadastroReceitas.html">
-            <div class="card">
-
-              <div class="card-header" align="center">
-                <h1>Receitas</h1>
-              </div>
-
-                <div class="card-body card-totais">
-                  <h1 id="totalreceitas">0</h1>
-                </div>
-
-            </div>
-          </a>  
-        </div>
-
-      <div class="col-md-4">
-        <a href="cadastroDespesas.html">
           <div class="card">
 
             <div class="card-header" align="center">
-              <h1>Despesas</h1>
+              <h1>Receitas</h1>
             </div>
-          
-            <div class="card-body card-totais">
-              <h1 id="totaldespesas">0</h1>
-            </div>
-          
+
+              <div class="card-body card-totais">
+                <h1 id="totalreceitas">R$ 0</h1>
+              </div>
+
           </div>
-        </a>
+        </div>
+
+      <div class="col-md-4">
+        <div class="card">
+
+          <div class="card-header" align="center">
+            <h1>Despesas</h1>
+          </div>
+          
+          <div class="card-body card-totais">
+            <h1 id="totaldespesas">R$ 0</h1>
+          </div>
+          
+        </div>
       </div>
 
       <div class="col-md-4">
@@ -109,15 +101,84 @@
           </div>
 
           <div class="card-body card-totais">
-            <h1 id="totalsaldo">0</h1>
+            <h1 id="totalsaldo">R$ 0</h1>
           </div>
 
         </div>  
       </div>
 
-      <div class="col-md-4"></div>
-
       </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+    
+              <div class="card-header" align="center">
+                <h1>Lançar Movimentação</h1>
+              </div>
+              
+              <div class="card-body card-totais">
+                <label for="">Conta</label>
+                <select name="contalancamento" id="contalancamento" class="form-control">
+                                          
+                </select>
+
+                <div class="card-body card-totais">
+                  <label for="">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-control">
+                      <option value="Receitas">Receitas</option>
+                      <option value="Despesas">Despesas</option>
+                    </select>
+                </div>
+
+                <div class="form-group" hidden>
+                  <label for="" >ID</label>
+                  <input type="text" class="form-control" id="id" >
+              </div>
+
+              <div class="form-group" hidden>
+                <label for="" >Tipo</label>
+                <input type="text" class="form-control" id="tipo" >
+            </div>
+
+              <div class="form-group" hidden>
+                <label for="" >Data</label>
+                <input type="date" class="form-control" id="data">
+            </div>
+
+              </div>
+
+              <div class="card-body card-totais">
+                <label for="">Valor</label>
+                <input id="valor" type="number" class="form-control">
+              </div>
+
+              <div class="card-body card-totais">
+                <button class="btn btn-outline-success form-group" type="button" onclick="cadastrar()">Salvar</button>
+                <button class="btn btn-outline-info form-group" type="button" onclick="alterar()">Alterar</button>
+              </div>
+
+            </div>
+
+            </div>
+
+            <div class="col-md-8 col-xs-8">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tipo</th>
+                      <th>Conta</th>
+                      <th>Valor</th>
+                      <th>Data</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody2">
+                   
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
       
     </div>
 
@@ -126,6 +187,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="js/index.js"></script>
+  <script src="js/lancamentos.js"></script>
 
 </body>
 

@@ -161,6 +161,7 @@ for(let i = 0; i < inputs.length; i++){
 
 function editarUsuario(id){
 
+  let usuarios = JSON.parse(window.localStorage.getItem("usuarios"));
   for(let i = 0; i < usuarios.length; i++){
     if(usuarios[i].id == id){
       document.getElementById("id").value = usuarios[i].id;
@@ -186,7 +187,7 @@ function alterarUsuario(){
   usuarios[id] = {id,status,nome,endereco,telefone,email};
   Swal.fire({
     icon: 'success',
-    title: 'Usuário atualizado com sucesso!',
+    title: 'Dados atualizados com sucesso!',
     showConfirmButton: false,
     timer: 1500
   });
@@ -208,8 +209,7 @@ function listarUsuarios(){
                   "<td id='tdendereco'>"+usuario.endereco+"</td>"+
                   "<td id='tdtelefone'>"+usuario.telefone+"</td>"+
                   "<td id='tdemail'>"+usuario.email+"</td>"+
-                  "<td id='tdacoes'><button class='btn btn-success' onclick='editarUsuario("+usuario.id+")'><i class='fa fa-edit'></i></button>"+
-                  "<button class='btn btn-danger'onclick='apagarUsuario("+usuario.id+")'><i class='fa fa-trash'></i></button></td>"
+                  "<td id='tdacoes'><button class='btn btn-success' onclick='editarUsuario("+usuario.id+")'><i class='fa fa-edit'></i></button>"
                 +"</tr>";
         row.innerHTML = linha;
         }
@@ -266,8 +266,59 @@ function alterarSenha(){
   }
 }
 
+function ListarCatContas(){
+  let Contas = JSON.parse(localStorage.getItem('contas'))
+  let linhacad = "";
+  Contas.forEach(element => {
+    let row = document.getElementById("contalancamento");
+      linhacad += "<option value="+element.nome+">"+element.nome+"</option>"
+      row.innerHTML = linhacad;
+  });
+}
+
+ListarCatContas();
+
 function sair(){
 
   window.location.href = "index.html";
 
 }
+
+function totalreceitas(){
+
+  let lancamentos = JSON.parse(window.localStorage.getItem("lancamentos"));
+  
+  if(lancamentos){
+   document.getElementById("totalreceitas").innerHTML = "R$ " + contas.length;
+  }else{
+   document.getElementById("totalusuarios").innerHTML = "R$ 0,00";
+  }
+
+}
+
+function totaldespesas(){
+
+  let contas = JSON.parse(window.localStorage.getItem("contas"));
+  if(contas){
+   document.getElementById("totaldespesas").innerHTML = "R$ " + contas.length;
+  }else{
+   document.getElementById("totalusuarios").innerHTML = "R$ 0,00";
+  }
+
+}
+
+function totalsaldo(){
+
+  let contas = JSON.parse(window.localStorage.getItem("contas"));
+  if(contas){
+   document.getElementById("totalsaldo").innerHTML = "R$ " + contas.length;
+  }else{
+   document.getElementById("totalusuarios").innerHTML = "R$ 0,00";
+  }
+
+}
+
+  totalreceitas();
+  totaldespesas();
+  totalsaldo();
+

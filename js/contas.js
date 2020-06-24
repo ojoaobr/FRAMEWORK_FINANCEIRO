@@ -1,9 +1,9 @@
-function cadConta(){
-    const descricao = document.getElementById('descricao').value;
+function cadastrar(){
+    const nome = document.getElementById('nome').value;
     const tipo = document.getElementById('tipo').value;
     const categoria = document.getElementById('categorias').value;
 
-    if(descricao == "" || tipo == ""){
+    if(nome == ""){
         Swal.fire({
             icon: 'error',
             title: 'Preencha todos os campos!',
@@ -12,7 +12,7 @@ function cadConta(){
         })
     }
     else{
-        const conta = {id: Date.now(), descricao, tipo, categoria};
+        const conta = {id: Date.now(), nome, tipo, categoria};
 
         let contasGravadas = JSON.parse(window.localStorage.getItem('contas'));
         if(contasGravadas == null){
@@ -50,7 +50,7 @@ function listarContas(){
             row = document.getElementById('tbody');
             linhaconta += "<tr style='width: 100%'>"+
                      "<td style='color: black;' id='tdid'>"+element.id +"</td>"+
-                     "<td style='color: black;' id='tddescricao'>"+element.descricao +"</td>"+
+                     "<td style='color: black;' id='nome'>"+element.nome +"</td>"+
                      "<td style='color: black;' id='tdtipo'>"+element.tipo +"</td>"+
                      "<td style='color: black;' id='tdcategoria'>"+element.categoria +"</td>"+
                      "<td id='tdacoes'><button style='margin-right:2px' class='btn btn-outline-success' onclick='editarContas("+element.id+")'><i class='fa fa-edit'></i></button>"+
@@ -77,14 +77,14 @@ function apagarContas(id){
             localStorage.setItem('contas', JSON.stringify(contasGravadas));
             listarContas();
             if(window.localStorage.getItem('contas') == "[]"){
-                window.location.reload('cadconta.html');
+                window.location.reload('cadastrocontas.html');
             }
         }
     })
 }
 
 function ListarCatContas(){
-    let Categorias = JSON.parse(localStorage.getItem('categorias'))
+    let Categorias = JSON.parse(localStorage.getItem('categorias'));
     let linhacad = "";
     Categorias.forEach(element => {
       let row = document.getElementById("categorias");
@@ -92,34 +92,19 @@ function ListarCatContas(){
         row.innerHTML = linhacad;
     });
 }
+
 function editarContas(id){
+
+    let conta = JSON.parse(window.localStorage.getItem("contas"));
     for(let i = 0; i < conta.length; i++){
       if(conta[i].id == id){
-        document.getElementById("descricao").value = conta[i].descricao;
+        document.getElementById("id").value = conta[i].id;
+        document.getElementById("nome").value = conta[i].nome;
         document.getElementById("tipo").value = conta[i].tipo;
-        document.getElementById("categorias").value = conta[i].categorias;
+        document.getElementById("categorias").value = conta[i].categoria;
 
       }
     }
-  }
-  function atualizar(){
-
-
-    const descricao = document.getElementById('descricao').value;
-    const tipo = document.getElementById('tipo').value;
-    const categoria = document.getElementById('categorias').value;
-  
-    conta[i] = {descricao, tipo, categoria};
-  
-    Swal.fire({
-      
-      icon: 'success',
-      title: 'Conta atualizada com sucesso!',
-      showConfirmButton: false,
-      timer: 1500
-    });
-    listarContas();
-    Limpar()
   }
 
 function Limpar(){
@@ -127,6 +112,33 @@ function Limpar(){
     for(let i = 0; i < inputs.length; i++){
         inputs[i].value = "";
     }
+}
+
+function alterar(){
+
+  const id = document.getElementById("id").value;
+  const nome = document.getElementById("nome").value;
+  const tipo = document.getElementById("tipo").value;
+  const categoria = document.getElementById("categorias").value;
+
+  contaGravada = JSON.parse(window.localStorage.getItem("contas"));
+  let contaIndex = contaGravada.findIndex((conta => conta.id == id));
+
+  if(contaIndex >= 0){
+    contaGravada[contaIndex] = {id, nome, tipo, categoria};
+    window.localStorage.setItem("contas", JSON.stringify(contaGravada));
+  }
+
+  Swal.fire({
+    title: 'Conta atualizada com sucesso!',
+    icon: 'success',
+    showCancelButton: false,
+    ConfirmButtonText: 'OK'
+});
+
+  Limpar();
+  listarContas();
+
 }
 
 ListarCatContas();
